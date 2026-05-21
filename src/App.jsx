@@ -2,6 +2,8 @@ import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import './css/styles.css';
+import ListaProyectos from './components/ListaProyectos';
+import { useEffect, useState } from 'react'
 
 function App() {
   return (
@@ -10,7 +12,7 @@ function App() {
       <Nav />
       
       <main style={{ minHeight: '50vh', padding: '20px', textAlign: 'center' }}>
-        <h2>Lista de proyectos</h2>
+        <ListaProyectos />
       </main>
 
       <Footer />
