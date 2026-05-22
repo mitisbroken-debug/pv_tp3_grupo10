@@ -53,7 +53,6 @@ tbody tr:hover {
 }
 
 
-/* Contenedor para centrar todo */
 .seccion-formulario {
   text-align: center;
   padding: 20px;
@@ -70,7 +69,6 @@ tbody tr:hover {
   width: 220px;              
 }
 
-/* Estilo para el botón */
 .btn-Agregar {
   background-color: #001f54; 
   color: white;              
