@@ -1,0 +1,86 @@
+table, th, td {
+    border: 1px solid #cbd5e1;
+}
+table {
+    border-collapse: collapse;
+    width: min(100%, 980px);
+    background: white;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+th {
+    background: #334155;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+th, td {
+    padding: 14px 16px;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+tbody tr:hover {
+    background: #e2e8f0;
+}
+.btn-Buscar{
+   background-color: #e9eff6; 
+  border: 1px solid #d1d9e2; 
+  border-radius: 8px;        
+  padding: 10px;             
+  margin: 5px;              
+  color: #334155;            
+  width: 300px; 
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-eliminar:hover {
+    background-color: #ef4444;
+    color: white;
+    border-color: #dc2626;
+}
+
+
+.seccion-formulario {
+  text-align: center;
+  padding: 20px;
+}
+
+
+.caja-texto {
+  background-color: #e9eff6; 
+  border: 1px solid #d1d9e2; 
+  border-radius: 8px;        
+  padding: 10px;           
+  margin: 5px; 
+  color: #334155; 
+  width: 220px;              
+}
+
+.btn-Agregar {
+  background-color: #001f54; 
+  color: white;              
+  border: none;          
+  border-radius: 8px;        
+  padding: 12px 40px;       
+  font-weight: bold;         
+  cursor: pointer;           
+  display: block;           
+  margin: 15px auto;         
+}
+
+.btn-Agregar:hover {
+  background-color: #001233;
+}

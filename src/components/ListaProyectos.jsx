@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { inicialProyectos } from '../services/proyectoService'; 
-import './ListaProyectos.css';
+import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
 
