@@ -10,12 +10,12 @@ Este proyecto implementa una aplicación en React que muestra una lista de proye
 
 ## Integrantes del grupo
 
-| Nombre completo | Usuario de GitHub |
-|---|---|
-| Gabriel Ortega | [Gabo506](https://github.com/Gabo506) |
-| Federico Rios Marcial | [Fede-Marcial](https://github.com/Fede-Marcial) |
-| Mauro Arcangel Chauque | [Mauro006](https://github.com/Mauro006) |
-| Vega Brian Agustin | [mitisbroken-debug](https://github.com/mitisbroken-debug) |
+| Nombre completo        | Usuario de GitHub                                         |
+| ---------------------- | --------------------------------------------------------- |
+| Lucas Alvaro Flores    | [LucasAFlores](https://github.com/LucasAFlores)           |
+| Federico Rios Marcial  | [Fede-Marcial](https://github.com/Fede-Marcial)           |
+| Mauro Arcangel Chauque | [Mauro006](https://github.com/Mauro006)                   |
+| Vega Brian Agustin     | [mitisbroken-debug](https://github.com/mitisbroken-debug) |
 
 ## Cumplimiento de la consigna (TP3 Parte 1)
 
@@ -38,7 +38,6 @@ Se creó la carpeta `src/components` con los componentes funcionales reutilizabl
 - `Nav.jsx`
 - `Footer.jsx`
 - `ListaProyectos.jsx`
-
 
 ### 3) Integración de estilos
 
@@ -113,7 +112,3 @@ pv_tp3_grupo10/
 ├── index.html
 └── package.json
 ```
-
-
-
-
