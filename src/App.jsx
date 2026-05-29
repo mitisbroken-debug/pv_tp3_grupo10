@@ -15,7 +15,7 @@ function App() {
       <main style={{ minHeight: '50vh', padding: '20px', textAlign: 'center' }}>
         <ListaProyectos />
       </main>
-
+      <DetalleProyecto />
       <Footer />
     </>
   )
