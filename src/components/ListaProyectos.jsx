@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { inicialProyectos } from '../services/proyectoService'; 
+import proyectoService from '../services/proyectoService';
+import ProyectoCard from './ProyectoCard';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
 
-  const [proyectos, setProyectos] = useState(inicialProyectos); 
+  const [proyectos, setProyectos] = useState(() => proyectoService.obtenerProyectos());
   const [busqueda, setBusqueda] = useState(''); 
   
   const [nuevoTitulo, setNuevoTitulo] = useState('');
   const [nuevaCategoria, setNuevaCategoria] = useState('');
   const [nuevoEstado, setNuevoEstado] = useState('En curso');
+  const [nuevaDescripcion, setNuevaDescripcion] = useState('');
 
   const agregarProyecto = () => {
     if (nuevoTitulo.trim() === '' || nuevaCategoria.trim() === '') return;
@@ -18,17 +20,21 @@ function ListaProyectos() {
       id: proyectos.length + 1,
       titulo: nuevoTitulo,
       categoria: nuevaCategoria,
-      estado: nuevoEstado
+      estado: nuevoEstado,
+      descripcion: [nuevaDescripcion, ""] 
     };
 
-    setProyectos([...proyectos, nuevoProyecto]);
-    
+    proyectoService.agregarProyecto(nuevoProyecto);
+    setProyectos(proyectoService.obtenerProyectos());
+
     setNuevoTitulo('');
     setNuevaCategoria('');
+    setNuevaDescripcion('');
   };
 
   const eliminarProyecto = (id) => {
-    setProyectos(proyectos.filter(p => p.id !== id));
+    proyectoService.eliminarProyecto(id);
+    setProyectos(proyectoService.obtenerProyectos());
   };
 
   const proyectosFiltrados = proyectos.filter(p =>
@@ -54,22 +60,16 @@ function ListaProyectos() {
             <th>TITULO</th>
             <th>CATEGORIA</th>
             <th>ESTADO</th>
-            <th>ACCIONES</th>
+            <th colSpan="2">ACCIONES</th>
           </tr>
         </thead>
         <tbody>
-          {proyectosFiltrados.map((proyecto) => (
-            <tr key={proyecto.id}>
-              <td>{proyecto.id}</td>
-              <td>{proyecto.titulo}</td>
-              <td>{proyecto.categoria}</td>
-              <td>{proyecto.estado}</td>
-              <td>
-                <button className="btn-eliminar" onClick={() => eliminarProyecto(proyecto.id)}>
-                  Eliminar
-                </button>
-              </td>
-            </tr>
+             {proyectosFiltrados.map((proyecto) => (
+             <ProyectoCard
+              key={proyecto.id}
+              proyecto={proyecto}
+              eliminarProyecto={eliminarProyecto}
+            />
           ))}
         </tbody>
       </table>
@@ -98,6 +98,13 @@ function ListaProyectos() {
           <option value="Finalizado">Finalizado</option>
           <option value="Pendiente">Pendiente</option>
         </select>
+
+        <textarea 
+          className="caja-texto descripcion-input" 
+          placeholder="Escribe la descripción del proyecto..." 
+          value={nuevaDescripcion}
+          onChange={(e) => setNuevaDescripcion(e.target.value)}
+        />
 
         <button className="btn-Agregar" onClick={agregarProyecto}>Agregar Proyecto</button>
       </div>
