@@ -2,15 +2,18 @@ import { useState } from 'react';
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
 import FormularioProyecto from './FormularioProyecto';
+import DetalleProyecto from './DetalleProyecto';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
-
   const [proyectos, setProyectos] = useState(() =>
     proyectoService.obtenerProyectos()
   );
 
   const [busqueda, setBusqueda] = useState('');
+  
+  
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
 
   const [formulario, setFormulario] = useState({
     titulo: '',
@@ -23,7 +26,6 @@ function ListaProyectos() {
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
-
     setFormulario({
       ...formulario,
       [name]: value
@@ -31,7 +33,6 @@ function ListaProyectos() {
   };
 
   const agregarProyecto = () => {
-
     if (titulo.trim() === '' || categoria.trim() === '') return;
 
     const nuevoProyecto = {
@@ -39,11 +40,19 @@ function ListaProyectos() {
       titulo,
       categoria,
       estado,
-      descripcion: [descripcion, ""]
+     
+      descripcion: [descripcion, "Información adicional del nuevo proyecto registrado."],
+      links: [
+        { tipo: "PDF", url: "#" },
+        { tipo: "Drive", url: "#" },
+        { tipo: "GitHub", url: "#" }
+      ],
+      equipo: [
+        { nombre: "Usuario Creador", rol: "Asignado por defecto" }
+      ]
     };
 
     proyectoService.agregarProyecto(nuevoProyecto);
-
     setProyectos(proyectoService.obtenerProyectos());
 
     setFormulario({
@@ -57,6 +66,15 @@ function ListaProyectos() {
   const eliminarProyecto = (id) => {
     proyectoService.eliminarProyecto(id);
     setProyectos(proyectoService.obtenerProyectos());
+   
+    if (proyectoSeleccionado && proyectoSeleccionado.id === id) {
+      setProyectoSeleccionado(null);
+    }
+  };
+
+ 
+  const verDetalle = (proyecto) => {
+    setProyectoSeleccionado(proyecto);
   };
 
   const proyectosFiltrados = proyectos.filter((p) =>
@@ -65,7 +83,6 @@ function ListaProyectos() {
 
   return (
     <section>
-
       <div>
         <input
           className="btn-Buscar"
@@ -93,16 +110,22 @@ function ListaProyectos() {
               key={proyecto.id}
               proyecto={proyecto}
               eliminarProyecto={eliminarProyecto}
+              verDetalle={verDetalle}
             />
           ))}
         </tbody>
       </table>
-     <FormularioProyecto 
-      form={formulario}
-      manejarCambio={manejarCambio} 
-      agregarProyecto={agregarProyecto} 
-    />
 
+      <FormularioProyecto 
+        form={formulario}
+        manejarCambio={manejarCambio} 
+        agregarProyecto={agregarProyecto} 
+      />
+
+      
+      {proyectoSeleccionado && (
+        <DetalleProyecto proyecto={proyectoSeleccionado} />
+      )}
     </section>
   );
 }

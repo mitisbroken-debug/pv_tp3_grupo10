@@ -1,6 +1,6 @@
 import '../css/ProyectoCard.css';
 
-function ProyectoCard({ proyecto, eliminarProyecto }) {
+function ProyectoCard({ proyecto, eliminarProyecto, verDetalle }) {
 
   const { id, titulo, categoria, estado } = proyecto;
 
@@ -13,12 +13,15 @@ function ProyectoCard({ proyecto, eliminarProyecto }) {
       <td>
         <button
           className="btn-eliminar"
-          onClick={() => eliminarProyecto(id)} >Eliminar
+          onClick={() => eliminarProyecto(id)}
+        >
+          Eliminar
         </button>
       </td>
       <td>
         <button
           className="btn-detalles"
+          onClick={() => verDetalle(proyecto)}
         >
           Ver Detalles
         </button>
