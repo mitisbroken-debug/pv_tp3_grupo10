@@ -16,7 +16,7 @@ const proyectoService = (() => {
             ],
             equipo: [
                 { nombre: "Brian Quispe", rol: "Líder de Proyecto / Base de Datos" },
-                { nombre: "Luca Flores", rol: "Documentación y Testing" },
+                { nombre: "Lucas Flores", rol: "Documentación y Testing" },
                 { nombre: "Fede Marcial", rol: "Análisis de Rendimiento" },
                 { nombre: "Mauro López", rol: "Desarrollo de Scripts SQL" }
             ]
@@ -38,7 +38,7 @@ const proyectoService = (() => {
             equipo: [
                 { nombre: "Mauro López", rol: "Desarrollo de Macros" },
                 { nombre: "Brian Quispe", rol: "Diseño de Base de Datos" },
-                { nombre: "Luca Flores", rol: "Interfaz y UX en Sheets" },
+                { nombre: "Lucas Flores", rol: "Interfaz y UX en Sheets" },
                 { nombre: "Fede Marcial", rol: "Testing y Validación" }
             ]
         },
@@ -60,7 +60,7 @@ const proyectoService = (() => {
                 { nombre: "Fede Marcial", rol: "Desarrollo de Scripts" },
                 { nombre: "Brian Quispe", rol: "Configuración de Servidor" },
                 { nombre: "Mauro López", rol: "Monitoreo y Alertas" },
-                { nombre: "Luca Flores", rol: "Documentación Técnica" }
+                { nombre: "Lucas Flores", rol: "Documentación Técnica" }
             ]
         },
         {
@@ -78,7 +78,7 @@ const proyectoService = (() => {
                 { tipo: "GitHub", url: "https://github.com/grupo10/rendimiento-estudiantil" }
             ],
             equipo: [
-                { nombre: "Luca Flores", rol: "Visualización de Datos" },
+                { nombre: "Lucas Flores", rol: "Visualización de Datos" },
                 { nombre: "Mauro López", rol: "Procesamiento en Python" },
                 { nombre: "Brian Quispe", rol: "Gestión de Datos" },
                 { nombre: "Fede Marcial", rol: "Análisis Estadístico" }
@@ -101,7 +101,7 @@ const proyectoService = (() => {
             equipo: [
                 { nombre: "Brian Quispe", rol: "Diseño de Base de Datos" },
                 { nombre: "Fede Marcial", rol: "Desarrollo Frontend" },
-                { nombre: "Luca Flores", rol: "Diseño de Interfaz" },
+                { nombre: "Lucas Flores", rol: "Diseño de Interfaz" },
                 { nombre: "Mauro López", rol: "Backend y API" }
             ]
         }
