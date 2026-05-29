@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import './css/styles.css';
 import ListaProyectos from './components/ListaProyectos';
 import { useEffect, useState } from 'react'
+import DetalleProyecto from './components/DetalleProyecto';
 
 function App() {
   return (
