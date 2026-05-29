@@ -1,12 +1,17 @@
 # pv_tp3_grupo10
 
-Trabajo Práctico N.° 3 — Parte 1  
+Trabajo Práctico N.° 3 — Parte 1 y 2  
 Materia: Programación Visual  
 Año: 2026
 
-## Descripción breve del proyecto
+## Descripción del proyecto
 
-Este proyecto implementa una aplicación en React que muestra una lista de proyectos académicos y permite gestionar esa lista desde la interfaz. Se desarrolló siguiendo la consigna del TP3 Parte 1: separación de lógica en un módulo de servicio, creación de componentes reutilizables de layout, integración de estilos y manejo de estado con `useState`.
+Este repositorio contiene el desarrollo del sistema de "Gestión de Proyectos Educativos". El proyecto documenta la transición de un sitio web estático tradicional a un entorno interactivo desarrollado íntegramente en React, aplicando separación de responsabilidades y modularidad.
+
+La aplicación muestra una lista de proyectos académicos y permite gestionar esa información directamente desde la interfaz. Su desarrollo se realizó de forma incremental siguiendo las consignas del Trabajo Práctico 3:
+
+* **Parte 1:** Nos enfocamos en la separación de la lógica en un módulo de servicio (`proyectoService.js`), la creación de componentes reutilizables para el layout general, la integración de estilos modulares y el manejo de estados interactivos utilizando `useState`.
+* **Parte 2:** Evolucionamos la arquitectura dividiendo la vista principal en submódulos independientes (como el formulario y las tarjetas individuales `ProyectoCard`). Para esto, implementamos la comunicación entre componentes mediante el envío de **props** y aplicamos la **desestructuración** de objetos, logrando un código más limpio y escalable que soporta nueva información detallada.
 
 ## Integrantes del grupo
 
@@ -17,98 +22,63 @@ Este proyecto implementa una aplicación en React que muestra una lista de proye
 | Mauro Arcangel Chauque | [Mauro006](https://github.com/Mauro006)                   |
 | Vega Brian Agustin     | [mitisbroken-debug](https://github.com/mitisbroken-debug) |
 
-## Cumplimiento de la consigna (TP3 Parte 1)
-
-### 1) Creación del módulo de servicio (`proyectoService.js`)
-
-Se creó la carpeta `src/services` y dentro de ella el archivo `proyectoService.js`, que contiene el arreglo inicial de proyectos con los campos solicitados:
-
-- `id`
-- `titulo`
-- `categoria`
-- `estado`
-
-El módulo es el responsable de la lógica de datos de proyectos.
-
-### 2) Componentes para el layout
-
-Se creó la carpeta `src/components` con los componentes funcionales reutilizables pedidos:
-
-- `Header.jsx`
-- `Nav.jsx`
-- `Footer.jsx`
-- `ListaProyectos.jsx`
-
-### 3) Integración de estilos
-
-Los estilos se organizaron bajo `src/css` y se importan desde el componente principal.  
-También se utilizaron estilos específicos para la lista de proyectos.
-
-Archivos de estilos incluidos en la carpeta `src/css`:
-
-- **`styles.css`**: estilos generales del layout de la aplicación. Se importa en `App.jsx` y aplica CSS a:
-  - `body` — fondo, tipografía y márgenes de la página.
-  - `header` — encabezado del sitio (fondo oscuro, texto centrado, padding).
-  - `nav` — barra de navegación (flex, fondo blanco, sombra).
-  - `nav a` y `nav a:hover` — enlaces del menú y efecto al pasar el mouse.
-  - `main` — área principal donde se muestra la lista de proyectos.
-  - `footer` — pie de página (fondo oscuro, texto centrado).
-- **`ListaProyectos.css`**: estilos específicos del componente `ListaProyectos.jsx`. Se importa desde ese componente y aplica CSS a:
-  - **Tabla** (`table`, `th`, `td`) — bordes, encabezados, filas alternadas y efecto hover.
-  - **Campo de búsqueda** (`.btn-Buscar`) — input para filtrar proyectos por título.
-  - **Botón Eliminar** (`.btn-eliminar`) — estilo y hover del botón en cada fila.
-  - **Formulario de alta** (`.seccion-formulario`, `.caja-texto`) — inputs, select y espaciado del formulario.
-  - **Botón Agregar** (`.btn-Agregar`) — estilo y hover del botón para incorporar nuevos proyectos.
-
-### 4) Funcionalidades de la aplicación
-
-La aplicación permite:
-
-- Agregar nuevos proyectos.
-- Visualizar la lista de proyectos.
-- Eliminar proyectos existentes.
-- Buscar proyectos por título.
-
-### 5) Uso de hooks (`useState`)
-
-En `ListaProyectos.jsx` se usa `useState` para manejar:
-
-- el estado de `proyectos`,
-- el texto de búsqueda,
-- y los campos del formulario para altas.
-
-El renderizado del listado se realiza de forma dinámica con `.map()`, y las acciones del usuario actualizan la vista en tiempo real.
-
-#### Detalle del componente `ListaProyectos.jsx`
-
-`ListaProyectos.jsx` es el componente central del TP, ya que conecta la lista de proyectos con la interfaz:
-
-- **Estado inicial**: toma los proyectos iniciales desde el servicio y los guarda en el estado `proyectos`.
-- **Búsqueda en tiempo real**: mantiene `busqueda` y filtra los proyectos por coincidencia en el **título** mientras el usuario escribe.
-- **Render dinámico**: genera las filas de la tabla recorriendo la lista filtrada con `.map()`.
-- **Alta de proyecto**: usa estados para `nuevoTitulo`, `nuevaCategoria` y `nuevoEstado`, y al presionar **Agregar Proyecto** incorpora un nuevo objeto al estado.
-- **Eliminación**: cada fila tiene un botón **Eliminar** que remueve el proyecto del estado inmediatamente.
-
-#### Rol de `App.jsx`
-
-`App.jsx` funciona como componente contenedor del layout. Integra los componentes `Header`, `Nav` y `Footer`, y define el área principal (`<main>`) donde se renderiza `ListaProyectos` como **contenido central y único**.
-
-## Estructura principal del proyecto
+## Estructura del proyecto
 
 ```text
 pv_tp3_grupo10/
 ├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Nav.jsx
+│   ├── assets/             # Recursos estáticos (imágenes, íconos)
+│   ├── components/         # Componentes funcionales de la interfaz
+│   │   ├── DetalleProyecto.jsx
 │   │   ├── Footer.jsx
-│   │   └── ListaProyectos.jsx
-│   ├── css/
-│   ├── services/
+│   │   ├── FormularioProyecto.jsx
+│   │   ├── Header.jsx
+│   │   ├── ListaProyectos.jsx
+│   │   ├── Nav.jsx
+│   │   └── ProyectoCard.jsx
+│   ├── css/                # Hojas de estilo modulares por componente
+│   │   ├── DetalleProyecto.css
+│   │   ├── FormularioProyecto.css
+│   │   ├── ListaProyectos.css
+│   │   ├── ProyectoCard.css
+│   │   └── styles.css
+│   ├── services/           # Lógica pura de gestión de datos
 │   │   └── proyectoService.js
-│   ├── App.jsx
-│   └── main.jsx
-├── public/
-├── index.html
-└── package.json
+│   ├── App.css
+│   ├── App.jsx             # Componente contenedor raíz
+│   └── index.css           # Estilos globales base
+├── package.json
+└── README.md
+
 ```
+
+---
+
+## Parte 1
+
+Migración de la interfaz estática a componentes de React, uso de hooks (`useState`) y separación de responsabilidades entre lógica y vista.
+
+| Módulo | Archivo(s) | Qué hicimos |
+| --- | --- | --- |
+| **Servicio de Datos** | `src/services/proyectoService.js` | Arreglo inicial de 5 proyectos. Exportación de funciones flecha (`obtenerProyectos`, `agregarProyecto`, `eliminarProyecto`, `buscarProyecto`) para aislar la lógica matemática. |
+| **Layout Base** | `Header.jsx`, `Footer.jsx`, `Nav.jsx` | Transformación del HTML repetitivo en componentes funcionales. Enlaces del menú estáticos (`href="#"`) a la espera del enrutador. |
+| **Vista Principal** | `ListaProyectos.jsx` | Implementación de `useState`. Renderizado dinámico de la tabla, formulario para altas, botón de eliminar y campo de búsqueda con filtrado en tiempo real. |
+| **Estilos** | `styles.css`, `ListaProyectos.css` | Mapeo de estilos institucionales y de los elementos del explorador central. Importados directamente en los componentes correspondientes. |
+
+---
+
+## Parte 2
+
+Foco en la comunicación entre componentes mediante el pasaje de información (**Props**) y simplificación con **desestructuración** de objetos.
+
+| Módulo | Archivos | Qué hicimos |
+| --- | --- | --- |
+| **Tarjeta UI** | `ProyectoCard.jsx` | Componente visual para proyectos individuales. Recibe el objeto por props, aplica desestructuración (`const { id, titulo, categoria, estado } = proyecto`) y muestra la información junto con los botones de acción. |
+| **Refactorización** | `ListaProyectos.jsx` | Reemplazo de la estructura rígida de `<table>`. Ahora el `.map()` invoca `<ProyectoCard />`, pasándole las props necesarias y las funciones para eliminar o ver detalles. |
+| **Ampliación de Datos** | `DetalleProyecto.jsx`, `ListaProyectos.jsx` | Preparación de la vista extendida y actualización de los estados del formulario para soportar nuevos campos (recursos en PDF/Drive, roles del equipo). |
+
+---
+
+## Tecnologías
+
+React 18 · Vite · JavaScript (ES6+, módulos ES, desestructuración) · HTML5 · CSS3 · Node.js / npm
