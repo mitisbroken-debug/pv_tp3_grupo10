@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { inicialProyectos } from '../services/proyectoService'; 
+import gestionProyectos from '../services/proyectoService'; 
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
 
-  const [proyectos, setProyectos] = useState(inicialProyectos); 
+  const [proyectos, setProyectos] = useState(gestionProyectos.obtenerProyectos()); 
   const [busqueda, setBusqueda] = useState(''); 
   
   const [nuevoTitulo, setNuevoTitulo] = useState('');

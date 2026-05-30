@@ -15,7 +15,7 @@ const proyectoService = (() => {
                 { tipo: "GitHub", url: "https://github.com/grupo10/optimizacion-consultas" }
             ],
             equipo: [
-                { nombre: "Brian Quispe", rol: "Líder de Proyecto / Base de Datos" },
+                { nombre: "Brian Vega", rol: "Líder de Proyecto / Base de Datos" },
                 { nombre: "Luca Flores", rol: "Documentación y Testing" },
                 { nombre: "Fede Marcial", rol: "Análisis de Rendimiento" },
                 { nombre: "Mauro López", rol: "Desarrollo de Scripts SQL" }
