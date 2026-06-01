@@ -5,6 +5,7 @@ import './css/styles.css';
 import ListaProyectos from './components/ListaProyectos';
 import { useEffect, useState } from 'react'
 
+
 function App() {
   return (
     <>
@@ -14,7 +15,7 @@ function App() {
       <main style={{ minHeight: '50vh', padding: '20px', textAlign: 'center' }}>
         <ListaProyectos />
       </main>
-
+      
       <Footer />
     </>
   )

@@ -1,47 +1,88 @@
 import { useState } from 'react';
-import gestionProyectos from '../services/proyectoService'; 
+import proyectoService from '../services/proyectoService';
+import ProyectoCard from './ProyectoCard';
+import FormularioProyecto from './FormularioProyecto';
+import DetalleProyecto from './DetalleProyecto';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
+  const [proyectos, setProyectos] = useState(() =>
+    proyectoService.obtenerProyectos()
+  );
 
-  const [proyectos, setProyectos] = useState(gestionProyectos.obtenerProyectos()); 
-  const [busqueda, setBusqueda] = useState(''); 
-  
-  const [nuevoTitulo, setNuevoTitulo] = useState('');
-  const [nuevaCategoria, setNuevaCategoria] = useState('');
-  const [nuevoEstado, setNuevoEstado] = useState('En curso');
+  const [busqueda, setBusqueda] = useState('');
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+
+  const [formulario, setFormulario] = useState({
+    titulo: '',
+    categoria: '',
+    estado: 'En curso',
+    descripcion: ''
+  });
+
+  const { titulo, categoria, estado, descripcion } = formulario;
+
+  const manejarCambio = (e) => {
+    const { name, value } = e.target;
+    setFormulario({
+      ...formulario,
+      [name]: value
+    });
+  };
 
   const agregarProyecto = () => {
-    if (nuevoTitulo.trim() === '' || nuevaCategoria.trim() === '') return;
+    if (titulo.trim() === '' || categoria.trim() === '') return;
 
     const nuevoProyecto = {
       id: proyectos.length + 1,
-      titulo: nuevoTitulo,
-      categoria: nuevaCategoria,
-      estado: nuevoEstado
+      titulo,
+      categoria,
+      estado,
+      descripcion: [descripcion, "Información adicional del nuevo proyecto registrado."],
+      links: [
+        { tipo: "PDF", url: "#" },
+        { tipo: "Drive", url: "#" },
+        { tipo: "GitHub", url: "#" }
+      ],
+      equipo: [
+        { nombre: "Usuario Creador", rol: "Asignado por defecto" }
+      ]
     };
 
-    setProyectos([...proyectos, nuevoProyecto]);
-    
-    setNuevoTitulo('');
-    setNuevaCategoria('');
+    proyectoService.agregarProyecto(nuevoProyecto);
+    setProyectos(proyectoService.obtenerProyectos());
+
+    setFormulario({
+      titulo: '',
+      categoria: '',
+      estado: 'En curso',
+      descripcion: ''
+    });
   };
 
   const eliminarProyecto = (id) => {
-    setProyectos(proyectos.filter(p => p.id !== id));
+    proyectoService.eliminarProyecto(id);
+    setProyectos(proyectoService.obtenerProyectos());
+    if (proyectoSeleccionado && proyectoSeleccionado.id === id) {
+      setProyectoSeleccionado(null);
+    }
   };
 
-  const proyectosFiltrados = proyectos.filter(p =>
+  const verDetalle = (proyecto) => {
+    setProyectoSeleccionado(proyecto);
+  };
+
+  const proyectosFiltrados = proyectos.filter((p) =>
     p.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
     <section>
       <div>
-        <input 
-          className="btn-Buscar" 
-          type="text" 
-          placeholder="Buscar Proyectos" 
+        <input
+          className="btn-Buscar"
+          type="text"
+          placeholder="Buscar Proyectos"
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
@@ -54,53 +95,30 @@ function ListaProyectos() {
             <th>TITULO</th>
             <th>CATEGORIA</th>
             <th>ESTADO</th>
-            <th>ACCIONES</th>
+            <th colSpan="2">ACCIONES</th>
           </tr>
         </thead>
         <tbody>
           {proyectosFiltrados.map((proyecto) => (
-            <tr key={proyecto.id}>
-              <td>{proyecto.id}</td>
-              <td>{proyecto.titulo}</td>
-              <td>{proyecto.categoria}</td>
-              <td>{proyecto.estado}</td>
-              <td>
-                <button className="btn-eliminar" onClick={() => eliminarProyecto(proyecto.id)}>
-                  Eliminar
-                </button>
-              </td>
-            </tr>
+            <ProyectoCard
+              key={proyecto.id}
+              proyecto={proyecto}
+              eliminarProyecto={eliminarProyecto}
+              verDetalle={verDetalle}
+            />
           ))}
         </tbody>
       </table>
 
-      <div className="seccion-formulario">
-        <input 
-          type="text" 
-          className="caja-texto" 
-          placeholder="Título del proyecto" 
-          value={nuevoTitulo}
-          onChange={(e) => setNuevoTitulo(e.target.value)}
-        />
-        <input 
-          type="text" 
-          className="caja-texto" 
-          placeholder="Categoría" 
-          value={nuevaCategoria}
-          onChange={(e) => setNuevaCategoria(e.target.value)}
-        />
-        <select 
-          className="caja-texto" 
-          value={nuevoEstado}
-          onChange={(e) => setNuevoEstado(e.target.value)}
-        >
-          <option value="En curso">En curso</option>
-          <option value="Finalizado">Finalizado</option>
-          <option value="Pendiente">Pendiente</option>
-        </select>
+      <FormularioProyecto
+        form={formulario}
+        manejarCambio={manejarCambio}
+        agregarProyecto={agregarProyecto}
+      />
 
-        <button className="btn-Agregar" onClick={agregarProyecto}>Agregar Proyecto</button>
-      </div>
+      {proyectoSeleccionado && (
+        <DetalleProyecto proyecto={proyectoSeleccionado} />
+      )}
     </section>
   );
 }
