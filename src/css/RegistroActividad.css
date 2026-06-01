@@ -1,0 +1,17 @@
+.registro-contenedor {
+  background-color: #f0f4f8;
+  border-left: 4px solid #0056b3;
+  padding: 12px 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.registro-texto {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  font-family: monospace;
+  font-weight: 600;
+}

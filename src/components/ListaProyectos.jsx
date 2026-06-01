@@ -3,6 +3,7 @@ import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
 import FormularioProyecto from './FormularioProyecto';
 import DetalleProyecto from './DetalleProyecto';
+import RegistroActividad from './RegistroActividad';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
@@ -122,10 +123,10 @@ function ListaProyectos() {
         agregarProyecto={agregarProyecto} 
       />
 
-      
       {proyectoSeleccionado && (
         <DetalleProyecto proyecto={proyectoSeleccionado} />
       )}
+      
     </section>
   );
 }
