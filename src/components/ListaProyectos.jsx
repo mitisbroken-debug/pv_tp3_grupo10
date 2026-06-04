@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect, useRef } from 'react'; 
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
 import FormularioProyecto from './FormularioProyecto';
@@ -12,8 +12,6 @@ function ListaProyectos() {
 
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
-
- 
   const [ultimaActualizacion, setUltimaActualizacion] = useState('');
 
   const [formulario, setFormulario] = useState({
@@ -23,39 +21,31 @@ function ListaProyectos() {
     descripcion: ''
   });
 
-  const { titulo, categoria, estado, descripcion } = formulario;
-
+  const esPrimerRender = useRef(true);
 
   useEffect(() => {
-    
+    if (esPrimerRender.current) {
+      esPrimerRender.current = false;
+      return;
+    }
+
     const ahora = new Date();
-    
-    
     const dia = String(ahora.getDate()).padStart(2, '0');
-    const mes = String(ahora.getMonth() + 1).padStart(2, '0'); 
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0');
     const anio = ahora.getFullYear();
-    
     const horas = String(ahora.getHours()).padStart(2, '0');
     const minutos = String(ahora.getMinutes()).padStart(2, '0');
 
-    
-    const mensajeFormateado = `${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`;
-
-    
-    setUltimaActualizacion(mensajeFormateado);
-
-  }, [proyectos]); 
-
+    setUltimaActualizacion(`${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`);
+  }, [proyectos]);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
-    setFormulario({
-      ...formulario,
-      [name]: value
-    });
+    setFormulario({ ...formulario, [name]: value });
   };
 
   const agregarProyecto = () => {
+    const { titulo, categoria, estado, descripcion } = formulario;
     if (titulo.trim() === '' || categoria.trim() === '') return;
 
     const nuevoProyecto = {
@@ -69,20 +59,12 @@ function ListaProyectos() {
         { tipo: "Drive", url: "#" },
         { tipo: "GitHub", url: "#" }
       ],
-      equipo: [
-        { nombre: "Usuario Creador", rol: "Asignado por defecto" }
-      ]
+      equipo: [{ nombre: "Usuario Creador", rol: "Asignado por defecto" }]
     };
 
     proyectoService.agregarProyecto(nuevoProyecto);
     setProyectos(proyectoService.obtenerProyectos());
-
-    setFormulario({
-      titulo: '',
-      categoria: '',
-      estado: 'En curso',
-      descripcion: ''
-    });
+    setFormulario({ titulo: '', categoria: '', estado: 'En curso', descripcion: '' });
   };
 
   const eliminarProyecto = (id) => {
@@ -145,7 +127,6 @@ function ListaProyectos() {
         <DetalleProyecto proyecto={proyectoSeleccionado} />
       )}
 
-      
       {ultimaActualizacion && (
         <div style={{ marginTop: '20px', fontStyle: 'italic', color: '#555' }}>
           <p>Última actualización de la lista: {ultimaActualizacion}</p>
