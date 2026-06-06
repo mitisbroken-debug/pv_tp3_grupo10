@@ -181,8 +181,10 @@
   margin-left: 8px;
 }
 
-
 @media (max-width: 640px) {
-  .detalle-proyecto-contenedor h2 { font-size: 1.4rem; }
-  .detalle-proyecto-contenedor ul { grid-template-columns: 1fr; }
+  .detalle-proyecto-contenedor { padding: 18px; border-radius: 12px; }
+  .proyecto-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .recursos-grid { gap: 10px; }
+  .equipo-grid { gap: 10px; }
+  .detalle-proyecto-contenedor p { font-size: 0.95rem; }
 }

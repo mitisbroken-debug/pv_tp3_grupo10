@@ -29,3 +29,12 @@ th, td {
     color: #334155;            
     width: 300px; 
 }
+@media (max-width: 900px) {
+    table { width: 100%; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    th, td { padding: 10px 12px; }
+    .btn-Buscar { width: 100%; max-width: 100%; box-sizing: border-box; }
+}
+
+@media (max-width: 480px) {
+    th, td { padding: 8px 10px; font-size: 0.95rem; }
+}

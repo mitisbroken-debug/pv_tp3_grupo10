@@ -40,3 +40,20 @@ tbody tr:hover {
     color: white; 
     border-color: #16a34a;
 }
+
+@media (max-width: 600px) {
+    .btn-eliminar,
+    .btn-detalles {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 360px) {
+    .btn-eliminar,
+    .btn-detalles {
+        padding: 5px 8px;
+        font-size: 0.68rem;
+    }
+}

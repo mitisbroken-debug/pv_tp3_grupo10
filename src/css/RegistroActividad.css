@@ -15,3 +15,23 @@
   font-family: monospace;
   font-weight: 600;
 }
+
+@media (max-width: 600px) {
+  .registro-contenedor {
+    padding: 10px 12px;
+    margin-top: 12px;
+    border-radius: 3px;
+  }
+  .registro-texto {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .registro-contenedor {
+    padding: 8px 10px;
+  }
+  .registro-texto {
+    font-size: 12px;
+  }
+}

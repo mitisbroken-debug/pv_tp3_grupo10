@@ -36,3 +36,14 @@
 .btn-Agregar:hover {
     background-color: #001233;
 }
+
+@media (max-width: 600px) {
+    .caja-texto,
+    .descripcion-input {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .descripcion-input { min-height: 80px; }
+    .btn-Agregar { padding: 10px 24px; width: 100%; max-width: 360px; }
+}
