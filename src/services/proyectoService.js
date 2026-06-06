@@ -18,7 +18,7 @@ const proyectoService = (() => {
                 { nombre: "Brian Vega", rol: "Líder de Proyecto / Base de Datos" },
                 { nombre: "Lucas Flores", rol: "Documentación y Testing" },
                 { nombre: "Fede Marcial", rol: "Análisis de Rendimiento" },
-                { nombre: "Mauro López", rol: "Desarrollo de Scripts SQL" }
+                { nombre: "Mauro chauque", rol: "Desarrollo de Scripts SQL" }
             ]
         },
         {
@@ -36,7 +36,7 @@ const proyectoService = (() => {
                 { tipo: "GitHub", url: "https://github.com/grupo10/asistencia-macros" }
             ],
             equipo: [
-                { nombre: "Mauro López", rol: "Desarrollo de Macros" },
+                { nombre: "Mauro chauque", rol: "Desarrollo de Macros" },
                 { nombre: "Brian Vega", rol: "Diseño de Base de Datos" },
                 { nombre: "Lucas Flores", rol: "Interfaz y UX en Sheets" },
                 { nombre: "Fede Marcial", rol: "Testing y Validación" }
@@ -59,7 +59,7 @@ const proyectoService = (() => {
             equipo: [
                 { nombre: "Fede Marcial", rol: "Desarrollo de Scripts" },
                 { nombre: "Brian Vega", rol: "Configuración de Servidor" },
-                { nombre: "Mauro López", rol: "Monitoreo y Alertas" },
+                { nombre: "Mauro chauque", rol: "Monitoreo y Alertas" },
                 { nombre: "Lucas Flores", rol: "Documentación Técnica" }
             ]
         },
@@ -79,7 +79,7 @@ const proyectoService = (() => {
             ],
             equipo: [
                 { nombre: "Lucas Flores", rol: "Visualización de Datos" },
-                { nombre: "Mauro López", rol: "Procesamiento en Python" },
+                { nombre: "Mauro chauque", rol: "Procesamiento en Python" },
                 { nombre: "Brian Vega", rol: "Gestión de Datos" },
                 { nombre: "Fede Marcial", rol: "Análisis Estadístico" }
             ]
@@ -102,7 +102,7 @@ const proyectoService = (() => {
                 { nombre: "Brian Vega", rol: "Diseño de Base de Datos" },
                 { nombre: "Fede Marcial", rol: "Desarrollo Frontend" },
                 { nombre: "Lucas Flores", rol: "Diseño de Interfaz" },
-                { nombre: "Mauro López", rol: "Backend y API" }
+                { nombre: "Mauro chauque", rol: "Backend y API" }
             ]
         }
     ];

@@ -1,6 +1,6 @@
 # pv_tp3_grupo10
 
-Trabajo Práctico N.° 3 — Parte 1 y 2  
+Trabajo Práctico N.° 3 — Parte 1, 2 y 3  
 Materia: Programación Visual  
 Año: 2026
 
@@ -12,6 +12,7 @@ La aplicación muestra una lista de proyectos académicos y permite gestionar es
 
 * **Parte 1:** Nos enfocamos en la separación de la lógica en un módulo de servicio (`proyectoService.js`), la creación de componentes reutilizables para el layout general, la integración de estilos modulares y el manejo de estados interactivos utilizando `useState`.
 * **Parte 2:** Evolucionamos la arquitectura dividiendo la vista principal en submódulos independientes (como el formulario y las tarjetas individuales `ProyectoCard`). Para esto, implementamos la comunicación entre componentes mediante el envío de **props** y aplicamos la **desestructuración** de objetos, logrando un código más limpio y escalable que soporta nueva información detallada.
+* **Parte 3:** Incorporamos el hook `useEffect` para controlar efectos secundarios y sincronizar las modificaciones de la lista con un registro de actividad en tiempo real. Se aplicó `useRef` para evitar el disparo del efecto en el montaje inicial y se aisló el filtro de búsqueda del registro. Además, se componentizó el formulario de alta en `FormularioProyecto.jsx`.
 
 ## Integrantes del grupo
 
@@ -35,12 +36,14 @@ pv_tp3_grupo10/
 │   │   ├── Header.jsx
 │   │   ├── ListaProyectos.jsx
 │   │   ├── Nav.jsx
-│   │   └── ProyectoCard.jsx
+│   │   ├── ProyectoCard.jsx
+│   │   └── RegistroActividad.jsx
 │   ├── css/                # Hojas de estilo modulares por componente
 │   │   ├── DetalleProyecto.css
 │   │   ├── FormularioProyecto.css
 │   │   ├── ListaProyectos.css
 │   │   ├── ProyectoCard.css
+│   │   ├── RegistroActividad.css
 │   │   └── styles.css
 │   ├── services/           # Lógica pura de gestión de datos
 │   │   └── proyectoService.js
@@ -79,6 +82,27 @@ Foco en la comunicación entre componentes mediante el pasaje de información (*
 
 ---
 
+## Parte 3
+
+Foco en el control de efectos secundarios con `useEffect`, registro de actividad en tiempo real y componentización del formulario de alta.
+
+| Módulo | Archivo(s) | Qué hicimos |
+| --- | --- | --- |
+| **Registro de actividad** | `RegistroActividad.jsx`, `RegistroActividad.css` | Componente de presentación que recibe por props la fecha/hora formateada (`fecha`) y muestra el mensaje: *"Última actualización de la lista: DD/MM/AAAA a las HH:MM hs."* Estilos propios con contenedor destacado al pie de la vista. |
+| **Efectos secundarios** | `ListaProyectos.jsx` | Implementación de `useEffect` con arreglo de dependencias `[proyectos]`, de modo que el efecto solo se dispara al agregar o eliminar un proyecto. Se captura la fecha/hora con `new Date()`, se formatea con `padStart` y se guarda en el estado `ultimaActualizacion`. |
+| **Optimización con useRef** | `ListaProyectos.jsx` | Uso de `useRef` (`esPrimerRender`) como bandera para omitir la primera ejecución automática del `useEffect` al montar la página. El registro solo se muestra tras la primera acción real de alta o baja del usuario. |
+| **Aislamiento del filtro** | `ListaProyectos.jsx` | El campo de búsqueda opera sobre un estado independiente (`busqueda`) y genera `proyectosFiltrados` sin modificar el arreglo `proyectos`. De este modo, escribir en el buscador no altera la fecha del registro de actividad. |
+| **Formulario componentizado** | `FormularioProyecto.jsx`, `FormularioProyecto.css` | Extracción del bloque de alta a un componente hijo reutilizable. El padre (`ListaProyectos`) gestiona el estado del formulario y la lógica de envío; el hijo recibe `form`, `manejarCambio` y el callback `agregarProyecto`, que delega al servicio y actualiza la lista para disparar el registro. |
+
+### Detalle de la lógica del registro
+
+1. **Montaje inicial:** `ultimaActualizacion` comienza vacío y el `useRef` evita registrar una hora ficticia al cargar la página.
+2. **Alta o baja:** `agregarProyecto` y `eliminarProyecto` actualizan el servicio y llaman a `setProyectos`, lo que dispara el `useEffect`.
+3. **Formato del mensaje:** `DD/MM/AAAA a las HH:MM hs.` (día, mes, año, hora y minutos con dos dígitos).
+4. **Renderizado condicional:** el mensaje solo se renderiza cuando `ultimaActualizacion` tiene valor, es decir, después de la primera modificación real de la lista.
+
+---
+
 ## Tecnologías
 
-React 18 · Vite · JavaScript (ES6+, módulos ES, desestructuración) · HTML5 · CSS3 · Node.js / npm
+React 18 · Vite · JavaScript (ES6+, módulos ES, desestructuración) · HTML5 · CSS3 · Node.js / npm · Hooks (`useState`, `useEffect`, `useRef`)
