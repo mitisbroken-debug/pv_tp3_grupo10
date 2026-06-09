@@ -1,0 +1,64 @@
+
+.main-header {
+    background-color: #1a2530; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    padding: 0 30px;                
+    height: 85px;                   
+    color: #ffffff;
+    box-sizing: border-box;
+    border-bottom: 1px solid #2d3748; 
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-fi {
+    height: 48px;              
+    width: auto;               
+    object-fit: contain;
+}
+
+.header-center h1 {
+    font-size: 21px;    
+    font-weight: 500;   
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;    
+    color: #cbd5e1;     
+}
+
+.status-dot {
+    width: 8px;        
+    height: 8px;
+    background-color: #10b981; 
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981; 
+}
+
+.status-text {
+    font-weight: 500;
+}
+
+.status-divider {
+    color: #4a5568;
+    margin: 0 4px;
+}
+
+.system-date {
+    color: #94a3b8;
+}
