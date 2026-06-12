@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'; 
 import proyectoService from '../services/proyectoService';
-import ProyectoCard from './ProyectoCard';
-import FormularioProyecto from './FormularioProyecto';
-import DetalleProyecto from './DetalleProyecto';
+import ProyectoCard from '../components/ProyectoCard';
+import FormularioProyecto from '../components/FormularioProyecto';
+import DetalleProyecto from '../components/DetalleProyecto';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {

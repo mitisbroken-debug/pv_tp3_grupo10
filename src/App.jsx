@@ -1,12 +1,15 @@
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import Dashboard from './components/Dashboard';
-import ListaProyectos from './components/ListaProyectos';
-import Perfil from './components/Perfil';
 import DetalleProyectoPage from './components/DetalleProyectoPage';
 import './css/styles.css';
 import { Routes, Route } from 'react-router-dom';
+
+// --- ACÁ ESTÁ TU TRABAJO (PUNTO 2) ---
+// Cambiamos la ruta de importación de "./components/" a "./views/"
+import Dashboard from './views/Dashboard';
+import ListaProyectos from './views/ListaProyectos';
+import Perfil from './views/Perfil'; 
 
 function App() {
   return (
