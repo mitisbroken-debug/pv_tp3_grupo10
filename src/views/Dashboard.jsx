@@ -1,63 +1,116 @@
-import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
+import proyectoService from '../services/proyectoService';
 
-const Dashboard = () => {
+function Dashboard() {
+  const proyectos = proyectoService.obtenerProyectos();
+  const totalProyectos = proyectos.length;
+  const proyectosEnCurso = proyectos.filter((p) => p.estado === 'En curso').length;
+  const proyectosFinalizados = proyectos.filter((p) => p.estado === 'Finalizado').length;
+  const proyectosPendientes = proyectos.filter((p) => p.estado === 'Pendiente').length;
+  const avance = totalProyectos ? Math.round((proyectosFinalizados / totalProyectos) * 100) : 0;
+
   return (
-    <Container className="py-4">
-      {/* Cabecera más compacta */}
-      <header className="mb-4 text-center bg-white p-4 rounded-3 shadow-sm border border-light mx-auto" style={{ maxWidth: '800px' }}>
-        <h3 className="fw-bolder text-dark mb-2">Panel de Control General</h3>
-        <p className="text-muted fs-6 mb-0">
-          Monitoreo centralizado del estado de tus tareas y proyectos activos. 
-        </p>
-      </header>
+    <Container className="py-5">
+      <Row className="mb-4 align-items-center">
+        <Col md={8}>
+          <h1 className="display-5 fw-bold">Indicadores del Proyecto</h1>
+          <p className="text-muted fs-5">Métricas reales del servicio que muestran el estado actual de los proyectos del grupo.</p>
+        </Col>
+        <Col md={4} className="text-md-end mt-3 mt-md-0">
+          <span className="badge bg-primary fs-6">Proyecto activo</span>
+        </Col>
+      </Row>
 
-      {/* Tarjetas de métricas ajustadas */}
-      <Row className="g-3 mb-4 justify-content-center">
-        <Col md={5} lg={4}>
-          <Card className="border-0 shadow-sm rounded-3 h-100 bg-white overflow-hidden">
-            <div style={{ height: '4px', backgroundColor: '#0d6efd' }}></div>
-            <Card.Body className="p-3 d-flex align-items-center">
-              <div className="bg-light p-3 rounded-circle me-3 text-primary">
-                <i className="fa-solid fa-folder-tree fa-2x opacity-75"></i>
+      <Row className="g-4 mb-4">
+        <Col sm={6} lg={3}>
+          <Card className="h-100 border-0 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <Card.Subtitle className="mb-2 text-muted">Total de proyectos</Card.Subtitle>
+                  <h2 className="fw-bold text-primary">{totalProyectos}</h2>
+                </div>
+                <div className="text-secondary fs-3">📁</div>
               </div>
-              <div>
-                <h6 className="text-uppercase text-muted fw-bold mb-0" style={{fontSize: '0.75rem'}}>Total Proyectos</h6>
-                <h2 className="fw-bolder text-dark mb-0">5</h2>
-              </div>
+              <Card.Text className="text-muted">Proyectos registrados en el sistema.</Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        
-        <Col md={5} lg={4}>
-          <Card className="border-0 shadow-sm rounded-3 h-100 bg-white overflow-hidden">
-            <div style={{ height: '4px', backgroundColor: '#198754' }}></div>
-            <Card.Body className="p-3 d-flex align-items-center">
-              <div className="bg-light p-3 rounded-circle me-3 text-success">
-                <i className="fa-solid fa-bars-progress fa-2x opacity-75"></i>
+
+        <Col sm={6} lg={3}>
+          <Card className="h-100 border-0 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <Card.Subtitle className="mb-2 text-muted">En curso</Card.Subtitle>
+                  <h2 className="fw-bold text-warning">{proyectosEnCurso}</h2>
+                </div>
+                <div className="text-secondary fs-3">🚧</div>
               </div>
-              <div>
-                <h6 className="text-uppercase text-muted fw-bold mb-0" style={{fontSize: '0.75rem'}}>Proyectos en Curso</h6>
-                <h2 className="fw-bolder text-dark mb-0">3</h2>
+              <Card.Text className="text-muted">Proyectos actualmente en desarrollo.</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col sm={6} lg={3}>
+          <Card className="h-100 border-0 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <Card.Subtitle className="mb-2 text-muted">Finalizados</Card.Subtitle>
+                  <h2 className="fw-bold text-success">{proyectosFinalizados}</h2>
+                </div>
+                <div className="text-secondary fs-3">✅</div>
               </div>
+              <Card.Text className="text-muted">Proyectos ya concluidos.</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col sm={6} lg={3}>
+          <Card className="h-100 border-0 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <Card.Subtitle className="mb-2 text-muted">Pendientes</Card.Subtitle>
+                  <h2 className="fw-bold text-danger">{proyectosPendientes}</h2>
+                </div>
+                <div className="text-secondary fs-3">⏳</div>
+              </div>
+              <Card.Text className="text-muted">Proyectos que aún no arrancaron.</Card.Text>
             </Card.Body>
           </Card>
         </Col>
       </Row>
 
-      {/* Lista inferior más limpia */}
-      <section className="bg-white p-4 rounded-3 shadow-sm border border-light mx-auto" style={{ maxWidth: '800px' }}>
-        <h6 className="fw-bold mb-3 text-secondary text-uppercase" style={{fontSize: '0.85rem'}}>Actividad Reciente</h6>
-        <div className="d-flex justify-content-between align-items-center border-bottom py-2">
-          <div className="fw-bold fs-6 text-dark">Sistema de Gestión - Frontend</div>
-          <Badge bg="success" pill>Completado</Badge>
-        </div>
-        <div className="d-flex justify-content-between align-items-center py-2">
-          <div className="fw-bold fs-6 text-dark">Gestor de Tareas - TP4 React</div>
-          <Badge bg="warning" pill text="dark">En Proceso</Badge>
-        </div>
-      </section>
+      <Row>
+        <Col lg={6}>
+          <Card className="border-0 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <Card.Title className="mb-1">Avance de proyectos</Card.Title>
+                  <Card.Subtitle className="text-muted">{avance}% finalizados</Card.Subtitle>
+                </div>
+                <span className="badge bg-success">{proyectosFinalizados} / {totalProyectos}</span>
+              </div>
+              <ProgressBar now={avance} label={`${avance}%`} />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col lg={6}>
+          <Card className="border-0 shadow-sm">
+            <Card.Body>
+              <Card.Title className="mb-3">Descripción rápida</Card.Title>
+              <Card.Text className="text-muted">
+                El dashboard muestra información basada en los datos actuales del servicio de proyectos. Puedes usar esta pantalla para visualizar el total de trabajos, los que están en curso y el progreso general del equipo.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
-};
+}
 
 export default Dashboard;
