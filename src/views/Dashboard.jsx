@@ -12,12 +12,8 @@ function Dashboard() {
   return (
     <Container className="py-5">
       <Row className="mb-4 align-items-center">
-        <Col md={8}>
-          <h1 className="display-5 fw-bold">Indicadores del Proyecto</h1>
-          <p className="text-muted fs-5">Métricas reales del servicio que muestran el estado actual de los proyectos del grupo.</p>
-        </Col>
-        <Col md={4} className="text-md-end mt-3 mt-md-0">
-          <span className="badge bg-primary fs-6">Proyecto activo</span>
+        <Col>
+          <h1 className="display-5 fw-bold" style={{ color: '#000', marginTop: '-10px' }}>Estados de Proyectos</h1>
         </Col>
       </Row>
 
@@ -98,16 +94,7 @@ function Dashboard() {
             </Card.Body>
           </Card>
         </Col>
-        <Col lg={6}>
-          <Card className="border-0 shadow-sm">
-            <Card.Body>
-              <Card.Title className="mb-3">Descripción rápida</Card.Title>
-              <Card.Text className="text-muted">
-                El dashboard muestra información basada en los datos actuales del servicio de proyectos. Puedes usar esta pantalla para visualizar el total de trabajos, los que están en curso y el progreso general del equipo.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+        {/* Tarjeta "Descripción rápida" removida */}
       </Row>
     </Container>
   );
