@@ -16,7 +16,7 @@ const Footer = () => {
                     <p className="footer-title">Desarrollo (Grupo 10)</p>
                     <div className="integrantes-grid">
                         <p>Lucas Flores</p>
-                        <p>Braian Vega</p>
+                        <p>Brian Vega</p>
                         <p>Federico Ríos</p>
                         <p>Mauro Chauque</p>
                     </div>
