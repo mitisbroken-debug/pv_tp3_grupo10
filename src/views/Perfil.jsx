@@ -1,7 +1,7 @@
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const Perfil = () => {
-  // Roles más cortos y descripciones resumidas para que no se rompa la tarjeta
+  
   const integrantes = [
     { 
       nombre: "Lucas Alvaro Flores", 
@@ -50,7 +50,6 @@ const Perfil = () => {
             <Card className="border-0 shadow-sm rounded-3 h-100 bg-white">
               <Card.Body className="p-3 d-flex flex-column text-center align-items-center">
                 
-                {/* Avatar más chico (50x50 en vez de 80x80) */}
                 <div 
                   className="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold mb-2 shadow-sm"
                   style={{ 
@@ -63,12 +62,10 @@ const Perfil = () => {
                   {miembro.inicial}
                 </div>
                 
-                {/* Altura mínima para que los nombres largos no descuadren todo */}
                 <h6 className="fw-bold text-dark mb-2" style={{ minHeight: '38px' }}>
                   {miembro.nombre}
                 </h6>
                 
-                {/* Recuadro de rol adaptativo (ya no se sale por los costados) */}
                 <div 
                   className="bg-light text-secondary rounded px-2 py-1 mb-2 fw-semibold w-100" 
                   style={{ fontSize: '0.75rem' }}

@@ -94,7 +94,6 @@ function Dashboard() {
             </Card.Body>
           </Card>
         </Col>
-        {/* Tarjeta "Descripción rápida" removida */}
       </Row>
     </Container>
   );
