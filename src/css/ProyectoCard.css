@@ -6,16 +6,25 @@ tbody tr:hover {
     background: #e2e8f0;
 }
 
-.btn-eliminar {
-    background-color: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
+.btn-eliminar,
+.btn-detalles {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.2s ease;
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
 }
 
 .btn-eliminar:hover {
@@ -23,21 +32,16 @@ tbody tr:hover {
     color: white;
     border-color: #dc2626;
 }
+
 .btn-detalles {
-    background-color: #dcfce7; 
-    color: #15803d; 
-    border: 1px solid #bbf7d0; 
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    background-color: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
 }
 
 .btn-detalles:hover {
-    background-color: #22c55e; 
-    color: white; 
+    background-color: #22c55e;
+    color: white;
     border-color: #16a34a;
 }
 

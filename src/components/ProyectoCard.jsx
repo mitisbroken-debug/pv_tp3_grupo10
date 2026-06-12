@@ -1,6 +1,7 @@
 import '../css/ProyectoCard.css';
+import { Link } from 'react-router-dom';
 
-function ProyectoCard({ proyecto, eliminarProyecto, verDetalle }) {
+function ProyectoCard({ proyecto, eliminarProyecto }) {
 
   const { id, titulo, categoria, estado } = proyecto;
 
@@ -19,12 +20,9 @@ function ProyectoCard({ proyecto, eliminarProyecto, verDetalle }) {
         </button>
       </td>
       <td>
-        <button
-          className="btn-detalles"
-          onClick={() => verDetalle(proyecto)}
-        >
+        <Link className="btn-detalles" to={`/proyectos/${id}`}>
           Ver Detalles
-        </button>
+        </Link>
       </td>
     </tr>
   );
