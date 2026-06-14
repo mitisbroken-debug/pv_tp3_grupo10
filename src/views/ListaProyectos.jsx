@@ -1,70 +1,49 @@
 import { useState, useEffect, useRef } from 'react'; 
-import proyectoService from '../services/proyectoService';
+import proyectoService from '../services/proyectoService'; 
 import ProyectoCard from '../components/ProyectoCard';
 import FormularioProyecto from '../components/FormularioProyecto';
 import DetalleProyecto from '../components/DetalleProyecto';
+import RegistroActividad from '../components/RegistroActividad'; 
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
-  const [proyectos, setProyectos] = useState(() =>
-    proyectoService.obtenerProyectos()
-  );
-
+  const [proyectos, setProyectos] = useState(() => proyectoService.obtenerProyectos());
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState('');
 
-  const [formulario, setFormulario] = useState({
-    titulo: '',
-    categoria: '',
-    estado: 'En curso',
-    descripcion: ''
-  });
-
-  const esPrimerRender = useRef(true);
+  const cantidadInicial = useRef(proyectos.length);
 
   useEffect(() => {
-    if (esPrimerRender.current) {
-      esPrimerRender.current = false;
-      return;
-    }
+    if (proyectos.length === cantidadInicial.current) return;
 
     const ahora = new Date();
     const dia = String(ahora.getDate()).padStart(2, '0');
     const mes = String(ahora.getMonth() + 1).padStart(2, '0');
     const anio = ahora.getFullYear();
     const horas = String(ahora.getHours()).padStart(2, '0');
-    const minutos = String(ahora.getMinutes()).padStart(2, '0');
+    const minutes = String(ahora.getMinutes()).padStart(2, '0');
 
-    setUltimaActualizacion(`${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`);
-  }, [proyectos]);
+    setUltimaActualizacion(`${dia}/${mes}/${anio} a las ${horas}:${minutes} hs.`);
+  }, [proyectos]); 
 
-  const manejarCambio = (e) => {
-    const { name, value } = e.target;
-    setFormulario({ ...formulario, [name]: value });
-  };
-
-  const agregarProyecto = () => {
-    const { titulo, categoria, estado, descripcion } = formulario;
-    if (titulo.trim() === '' || categoria.trim() === '') return;
+  const agregarProyecto = (datosFormulario) => {
+    const { titulo, categoria, estado, descripcion } = datosFormulario;
 
     const nuevoProyecto = {
-      id: proyectos.length + 1,
+      id: proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id)) + 1 : 1,
       titulo,
       categoria,
       estado,
       descripcion: [descripcion, "Información adicional del nuevo proyecto registrado."],
       links: [
-        { tipo: "PDF", url: "#" },
-        { tipo: "Drive", url: "#" },
-        { tipo: "GitHub", url: "#" }
+        { tipo: "PDF", url: "#" }, { tipo: "Drive", url: "#" }, { tipo: "GitHub", url: "#" }
       ],
       equipo: [{ nombre: "Usuario Creador", rol: "Asignado por defecto" }]
     };
 
     proyectoService.agregarProyecto(nuevoProyecto);
     setProyectos(proyectoService.obtenerProyectos());
-    setFormulario({ titulo: '', categoria: '', estado: 'En curso', descripcion: '' });
   };
 
   const eliminarProyecto = (id) => {
@@ -86,13 +65,7 @@ function ListaProyectos() {
   return (
     <section>
       <div>
-        <input
-          className="btn-Buscar"
-          type="text"
-          placeholder="Buscar Proyectos"
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-        />
+        <input className="btn-Buscar" type="text" placeholder="Buscar Proyectos" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
       </div>
 
       <table>
@@ -107,31 +80,16 @@ function ListaProyectos() {
         </thead>
         <tbody>
           {proyectosFiltrados.map((proyecto) => (
-            <ProyectoCard
-              key={proyecto.id}
-              proyecto={proyecto}
-              eliminarProyecto={eliminarProyecto}
-              verDetalle={verDetalle}
-            />
+            <ProyectoCard key={proyecto.id} proyecto={proyecto} eliminarProyecto={eliminarProyecto} verDetalle={verDetalle} />
           ))}
         </tbody>
       </table>
 
-      <FormularioProyecto
-        form={formulario}
-        manejarCambio={manejarCambio}
-        agregarProyecto={agregarProyecto}
-      />
+      <FormularioProyecto agregarProyecto={agregarProyecto} />
 
-      {proyectoSeleccionado && (
-        <DetalleProyecto proyecto={proyectoSeleccionado} />
-      )}
+      {proyectoSeleccionado && <DetalleProyecto proyecto={proyectoSeleccionado} />}
 
-      {ultimaActualizacion && (
-        <div style={{ marginTop: '20px', fontStyle: 'italic', color: '#555' }}>
-          <p>Última actualización de la lista: {ultimaActualizacion}</p>
-        </div>
-      )}
+      {ultimaActualizacion && <RegistroActividad fecha={ultimaActualizacion} />}
     </section>
   );
 }
