@@ -11,9 +11,6 @@ const Nav = () => {
             <NavLink to="/proyectos" className={activeClass}>
                 Explorador de Proyectos
             </NavLink>
-            <NavLink to="/proyectos/1" className={activeClass}>
-                Detalle de Proyecto
-            </NavLink>
             <NavLink to="/perfil" className={activeClass}>
                 Perfil
             </NavLink>
@@ -22,4 +19,3 @@ const Nav = () => {
 }
 
 export default Nav;
-

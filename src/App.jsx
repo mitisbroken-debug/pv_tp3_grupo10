@@ -1,13 +1,13 @@
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import DetalleProyectoPage from './components/DetalleProyectoPage';
 import './css/styles.css';
 import { Routes, Route } from 'react-router-dom';
 
-
+// IMPORTANTE: DetalleProyectoPage ahora viene de 'views', no de 'components'
 import Dashboard from './views/Dashboard';
 import ListaProyectos from './views/ListaProyectos';
+import DetalleProyectoPage from './views/DetalleProyectoPage'; 
 import Perfil from './views/Perfil'; 
 
 function App() {
