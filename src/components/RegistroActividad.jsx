@@ -1,15 +1,12 @@
-import React from 'react';
-import '../css/RegistroActividad.css';
+import { Alert } from 'react-bootstrap';
 
-const RegistroActividad = ({ fecha }) => {
+function RegistroActividad({ fecha }) {
   return (
-    <div className="registro-contenedor">
-      <p className="registro-texto">
-      
-        Última actualización de la lista: {fecha}
-      </p>
-    </div>
+    <Alert variant="info" className="mt-4 shadow-sm border-0 text-center">
+      <i className="fa-solid fa-clock me-2"></i>
+      Última actualización de la lista de proyectos: <strong>{fecha}</strong>
+    </Alert>
   );
-};
+}
 
 export default RegistroActividad;
