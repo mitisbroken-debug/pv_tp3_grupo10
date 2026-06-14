@@ -21,36 +21,43 @@ function ProyectoCard({ proyecto, eliminarProyecto }) {
 
   return (
     <Col md={6} lg={4} className="mb-4">
-      <Card className="h-100 border-0 shadow-sm hover-card">
-        <Card.Body>
-          <Row className="mb-3">
-            <Col>
-              <Card.Title className="mb-2">{titulo}</Card.Title>
-              <Badge bg="primary" className="me-2">ID: {id}</Badge>
-              <Badge bg={getEstadoVariant(estado)}>{estado}</Badge>
-            </Col>
-          </Row>
+      <Card className="h-100 border-0 shadow-sm hover-card text-center">
+        <Card.Body className="d-flex flex-column justify-content-between">
           
-          <Card.Text className="text-muted">
-            <strong>Categoría:</strong> {categoria}
-          </Card.Text>
+          <div>
+            <Row className="mb-3">
+              <Col>
+                <Card.Title className="mb-2 fw-bold">{titulo}</Card.Title>
+                <div className="d-flex justify-content-center gap-2 mb-2">
+                  <Badge bg="primary">ID: {id}</Badge>
+                  <Badge bg={getEstadoVariant(estado)}>{estado}</Badge>
+                </div>
+              </Col>
+            </Row>
+            
+            <Card.Text className="text-muted mb-4">
+              <strong>Categoría:</strong> {categoria}
+            </Card.Text>
+          </div>
 
-          <Row className="gap-2">
-            <Col xs="auto">
-              <Link to={`/proyectos/${id}`} className="btn btn-primary btn-sm">
+          <Row className="justify-content-center gap-2 mt-auto">
+            <Col xs="auto" className="p-0">
+              <Link to={`/proyectos/${id}`} className="btn btn-primary btn-sm px-3">
                 Ver Detalles
               </Link>
             </Col>
-            <Col xs="auto">
+            <Col xs="auto" className="p-0">
               <Button
                 variant="danger"
                 size="sm"
+                className="px-3"
                 onClick={() => eliminarProyecto(id)}
               >
                 Eliminar
               </Button>
             </Col>
           </Row>
+
         </Card.Body>
       </Card>
     </Col>

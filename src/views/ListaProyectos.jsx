@@ -67,7 +67,7 @@ function ListaProyectos() {
     <Container className="py-5">
       <Row className="mb-4">
         <Col>
-          <h2 className="display-6 fw-bold mb-3">Mis Proyectos</h2>
+          <h2 className="display-6 fw-bold mb-3 text-dark">Lista de Proyectos</h2>
           <InputGroup className="mb-4">
             <Form.Control
               placeholder="Buscar Proyectos..."
