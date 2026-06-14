@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'; 
+import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import proyectoService from '../services/proyectoService'; 
 import ProyectoCard from '../components/ProyectoCard';
 import FormularioProyecto from '../components/FormularioProyecto';
@@ -63,34 +64,44 @@ function ListaProyectos() {
   );
 
   return (
-    <section>
-      <div>
-        <input className="btn-Buscar" type="text" placeholder="Buscar Proyectos" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-      </div>
+    <Container className="py-5">
+      <Row className="mb-4">
+        <Col>
+          <h2 className="display-6 fw-bold mb-3">Mis Proyectos</h2>
+          <InputGroup className="mb-4">
+            <Form.Control
+              placeholder="Buscar Proyectos..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              className="border-2"
+            />
+          </InputGroup>
+        </Col>
+      </Row>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>TITULO</th>
-            <th>CATEGORIA</th>
-            <th>ESTADO</th>
-            <th colSpan="2">ACCIONES</th>
-          </tr>
-        </thead>
-        <tbody>
-          {proyectosFiltrados.map((proyecto) => (
-            <ProyectoCard key={proyecto.id} proyecto={proyecto} eliminarProyecto={eliminarProyecto} verDetalle={verDetalle} />
-          ))}
-        </tbody>
-      </table>
+      <Row>
+        {proyectosFiltrados.length > 0 ? (
+          proyectosFiltrados.map((proyecto) => (
+            <ProyectoCard
+              key={proyecto.id}
+              proyecto={proyecto}
+              eliminarProyecto={eliminarProyecto}
+              verDetalle={verDetalle}
+            />
+          ))
+        ) : (
+          <Col className="text-center py-5">
+            <p className="text-muted fs-5">No hay proyectos que coincidan con la búsqueda.</p>
+          </Col>
+        )}
+      </Row>
 
       <FormularioProyecto agregarProyecto={agregarProyecto} />
 
       {proyectoSeleccionado && <DetalleProyecto proyecto={proyectoSeleccionado} />}
 
       {ultimaActualizacion && <RegistroActividad fecha={ultimaActualizacion} />}
-    </section>
+    </Container>
   );
 }
 
