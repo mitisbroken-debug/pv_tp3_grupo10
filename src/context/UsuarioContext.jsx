@@ -12,8 +12,8 @@ export const UsuarioProvider = ({ children }) => {
     }
     
     return {
-      nombre: "Lucas Alvaro Flores"
-      dni: "12.345.678",
+        nombre: "Lucas Alvaro Flores",
+        dni: "12.345.678",
       rol: "Alumno",
       institucion: "Universidad Nacional de Jujuy - Facultad de Ingeniería"
     };
