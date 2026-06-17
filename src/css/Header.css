@@ -1,10 +1,9 @@
-
 .main-header {
     background-color: #1a2530; 
     display: flex;
     justify-content: space-between; 
     align-items: center;            
-    padding: 0 30px;                
+    padding: 10px 30px; 
     height: 85px;                   
     color: #ffffff;
     box-sizing: border-box;
@@ -14,6 +13,7 @@
 .header-left {
     display: flex;
     align-items: center;
+    flex: 1; 
 }
 
 .header-logo-fi {
@@ -22,24 +22,58 @@
     object-fit: contain;
 }
 
+.header-center {
+    flex: 2; 
+    text-align: center;
+}
+
 .header-center h1 {
     font-size: 21px;    
-    font-weight: 500;   
+    font-weight: 600;   
     margin: 0;
     letter-spacing: 0.5px;
 }
 
+.header-subtitle {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #cbd5e1; 
+}
+
 .header-right {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end; 
+    gap: 6px;
+    flex: 1; 
+}
+
+.user-summary {
+    text-align: right;
+    line-height: 1.3;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-role {
+    font-weight: 600;
+    color: #ffffff; 
+}
+
+.user-institution {
+    font-size: 0.75rem; 
+    color: #94a3b8;
 }
 
 .system-status {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;    
-    color: #cbd5e1;     
+    font-size: 12px;    
+    color: #94a3b8;     
 }
 
 .status-dot {
@@ -56,7 +90,7 @@
 
 .status-divider {
     color: #4a5568;
-    margin: 0 4px;
+    margin: 0 2px;
 }
 
 .system-date {
