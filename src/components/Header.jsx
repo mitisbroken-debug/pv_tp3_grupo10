@@ -1,7 +1,9 @@
-import React from 'react';
-import '../css/Header.css'; 
+import React, { useContext } from 'react';
+import '../css/Header.css';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 const Header = () => {
+    const { usuario } = useContext(UsuarioContext);
     const fechaActual = new Date().toLocaleDateString('es-AR');
 
     return (
@@ -12,9 +14,14 @@ const Header = () => {
             
             <div className="header-center">
                 <h1>Gestor de Proyectos</h1>
+                <p className="header-subtitle">Bienvenido, {usuario?.nombre || 'Usuario'}</p>
             </div>
         
             <div className="header-right">
+                <div className="user-summary">
+                    <span className="user-role">{usuario?.rol}</span>
+                    <span className="user-institution">{usuario?.institucion}</span>
+                </div>
                 <div className="system-status">
                     <span className="status-dot"></span>
                     <span className="status-text">Online</span>
