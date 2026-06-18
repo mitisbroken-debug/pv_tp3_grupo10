@@ -126,3 +126,25 @@ En esta etapa se implementó la navegación con `react-router-dom` para coordina
 - El botón `Ver Detalles` en cada tarjeta redirige a la ruta específica del proyecto.
 - La vista de detalle se muestra sin recargar la página.
 - Se mantuvo la estructura de proyecto y el servicio de datos existente.
+
+---
+
+## Parte 5
+
+En esta etapa incorporamos el estado global usando React Context API para compartir el perfil de usuario entre componentes y evitar el prop drilling.
+
+| Módulo                             | Archivo(s)                                      | Qué hicimos                                                                                                                                              |
+| ---------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Contexto de Usuario**           | `src/context/UsuarioContext.jsx`                | Creamos el contexto `UsuarioContext`, inicializado con datos simulados de usuario ya logueado. Expone el objeto `usuario` y la función `actualizarPerfil`. |
+| **Proveedor global**              | `src/App.jsx`                                   | Envolvimos la app con `<UsuarioProvider>`, permitiendo que `Header`, rutas y vistas compartan el mismo estado global sin pasar props manualmente.         |
+| **Consumo en el encabezado**      | `src/components/Header.jsx`                     | `Header` usa `useContext(UsuarioContext)` para mostrar dinámicamente el nombre y rol del usuario logueado en la barra superior.                         |
+| **Perfil dinámico e interactivo** | `src/views/Perfil.jsx`                          | `Perfil` consume el contexto global para renderizar los datos del usuario. Incluye un modo de edición con formulario y botón `Editar Perfil`.           |
+| **Actualización sincronizada**     | `src/views/Perfil.jsx`                          | Al guardar cambios, `Perfil` llama a `actualizarPerfil`, actualizando inmediatamente el contexto y reflejando el nombre en `Header` sin recargar.       |
+| **Persistencia local**            | `src/context/UsuarioContext.jsx`                | Se guarda el perfil en `localStorage` con `useEffect`. Al iniciar, el provider lee primero el almacenamiento local y usa los datos guardados si existen. |
+
+### Detalle de la implementación
+
+- El estado inicial del usuario se define con valores por defecto y se reemplaza con el objeto almacenado en `localStorage` si ya existe.
+- La función `actualizarPerfil` actualiza el estado global y dispara el efecto que persiste los cambios.
+- La vista de perfil muestra los datos del usuario y permite editar `nombre`, `dni`, `rol` e `institución`.
+- La aplicación mantiene los cambios después de recargar la página, conservando el estado global en el navegador.
